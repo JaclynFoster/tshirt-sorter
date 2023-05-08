@@ -18,32 +18,36 @@ const tshirtSorter = (str) => {
    let strObj = {
     s: [],
     m: [],
-    l: []
+    l: [],
+    xs: []
    }
   for(let i = 0; i < str.length; i++) {
-    let letter = str[i].toLowerCase().trim()
-    if (letter === "s") {
-        strObj.s.push(letter)
-    } else if (letter === "m") {
-        strObj.m.push(letter)
-    } else if (letter === "l") {
-        strObj.l.push(letter)
-    }
-
+  //   str[i].toLowerCase().trim()
+ if (str[i] === "s") {
+    strObj.s.push(str[i])
+  } else if (str[i] === "m") {
+    strObj.m.push(str[i])
+  } else if (str[i] === "l") {
+    strObj.l.push(str[i])
+    
+  } else if(str[i] === "x" && str[i + 1] === "s") {
+      strObj.xs.push(str[i], str[i + 1])
+  } 
   }
  let sJoin = strObj.s.join("")
  let mJoin = strObj.m.join("")
  let lJoin = strObj.l.join("")
+ let xsJoin = strObj.xs.join("")
 
-  return sJoin + mJoin + lJoin
+  return xsJoin + sJoin + mJoin + lJoin 
 }
 
-// console.log(tshirtSorter("mlslmsmlslmsmlsmls"))
+console.log(tshirtSorter("mlslmsmlslmsmlsmlsxsxsxsxs"))
 
 const tshirtSorter2 = str => str.toLowerCase().trim().split("").sort().reverse().join("")
     
 
-//console.log(tshirtSorter2("mlslmsmlslmsmlsmls"))
+console.log(tshirtSorter2("mlslmsmlslmsmlsmls"))
 
 const tshirtSorter3 = str => {
    //let strObj = {s:"", m:"", l:""}
@@ -53,7 +57,8 @@ const tshirtSorter3 = str => {
     if(!strObj[letter]) {  //This checks to see if property exists on the object if not then we add it.
         // This is useful if we do not know what sizes are included in the string like size XS
         strObj[letter] = ""
-    }
+    } 
+  
     strObj[letter] += letter
    })
   return strObj.s + strObj.m + strObj.l
